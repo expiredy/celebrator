@@ -1,10 +1,9 @@
-```<template>
+<template>
     <div class="container">
       <article class="card" ref="main">
         <div class="content"> 
-          <h2>The Best Bitches</h2>
+            <h2>{{this.main_content}}</h2>
           <p>Check out these top 10 beaches this summer.</p>
-          <button type="button">Explore</button>
         </div>
       </article>
     </div>
@@ -14,45 +13,43 @@
 import { defineComponent } from 'vue';
 
 
-const THRESHOLD = 10;
-var card_active: any;
+const THRESHOLD = 15;
 
-function handleHover(event: any) {
-    const { clientX, clientY, currentTarget } = event;
-    const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
-
-    var horizontal = (clientX - offsetLeft) / clientWidth;
-    var vertical = (clientY - offsetTop) / clientHeight;
-    var rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
-    var rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
-
-    if (card_active){
-        card_active.style.transform = 'perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1, 1, 1)';
-    }else{
-        console.log(card_active);
-    }
-}
-
-function resetStyles(event: any) {
-  if (card_active){
-    card_active.style.transform = 'perspective(${event.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)';
-  }
-}
 function startSystem (card: any, motion_match_media: MediaQueryList) {
-    if (!motion_match_media.matches) {
-        card_active = card;
-        card_active.addEventListener("mousemove", handleHover);
-        card_active.addEventListener("mouseleave", resetStyles);
+    
+    function handleHover(event: any) {
+        const { clientX, clientY, currentTarget } = event;
+        const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
+
+        var horizontal = (clientX - offsetLeft) / clientWidth;
+        var vertical = (clientY - offsetTop) / clientHeight;
+        var rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
+        var rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+
+        if (card){
+            card.style.transform = 'perspective(' + clientWidth + 'px) rotateX(' + rotateY + 'deg) rotateY(' + rotateX + 'deg) scale3d(1, 1, 1)';
+        }
     }
+
+    function resetStyles(event: any) {
+        if (card){
+            card.style.transform = 'perspective(' + event.currentTarget.clientWidth + 'px) rotateX(0deg) rotateY(0deg)';
+        }
+    }
+    
+    if (!motion_match_media.matches) {
+        card.addEventListener("mousemove", handleHover);
+        card.addEventListener("mouseleave", resetStyles);
+    }   
 }
 
 
 
 export default defineComponent({
     name: 'CongratulationFrame',              
-    props: {},    
-    mounted : function() {
-        var card = this.$refs.main;
+    props: {main_content: {default: 'Здесь могла быть ваша реклама', type: String}},    
+    mounted() {
+        var card: any = this.$refs.main;
         var motion_match_media = window.matchMedia("(prefers-reduced-motion)");
         startSystem(card, motion_match_media);
     },

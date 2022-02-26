@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-      <FrameViewHolder/>
+      <FrameCarousel/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import FrameViewHolder from "@/components/FrameViewHolder.vue"
+import FrameCarousel from "@/components/FrameCarousel.vue"
 
 export default defineComponent({
   name: 'HomeView',
   components: {
-    FrameViewHolder,
+    FrameCarousel,
   },
 });
 </script>   
