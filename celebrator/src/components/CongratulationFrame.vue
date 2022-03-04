@@ -1,19 +1,18 @@
 <template>
-    <div class="container">
-      <article class="card" ref="main">
+    <article class="card" ref="main">
         <div class="content"> 
-            <h2>{{this.main_content}}</h2>
-          <p>Check out these top 10 beaches this summer.</p>
+            <h2>Здесь могла быть ваша реклама</h2>
+            <p>Check out these top 10 beaches this summer.</p>
         </div>
-      </article>
-    </div>
+    </article>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, handleError } from 'vue';
 
 
 const THRESHOLD = 15;
+const ORIENTATION_LIMIT = 45;
 
 function startSystem (card: any, motion_match_media: MediaQueryList) {
     
@@ -39,7 +38,21 @@ function startSystem (card: any, motion_match_media: MediaQueryList) {
     
     if (!motion_match_media.matches) {
         card.addEventListener("mousemove", handleHover);
+        // card.addEventListener("deviceorientation", function(event: any) {
+        //     let position = Math.round(event.gamma);
+        //     if (Math.abs(position) > ORIENTATION_LIMIT) {
+        //         if (position > ORIENTATION_LIMIT) {
+        //                 position = ORIENTATION_LIMIT;
+        //             } else {
+        //                 position = -ORIENTATION_LIMIT;
+        //                 }
+        //             }
+        //     position = position / -100;
+        //     let style = "rotateY(" + position + "deg)";
+        //     card.style.transform = style;
+        //     });
         card.addEventListener("mouseleave", resetStyles);
+
     }   
 }
 
@@ -47,7 +60,9 @@ function startSystem (card: any, motion_match_media: MediaQueryList) {
 
 export default defineComponent({
     name: 'CongratulationFrame',              
-    props: {main_content: {default: 'Здесь могла быть ваша реклама', type: String}},    
+    props: {main_content: {default: 'Здесь могла быть ваша реклама', type: String},
+            signature: {default: 'Вдохновитель', type: String}},    
+
     mounted() {
         var card: any = this.$refs.main;
         var motion_match_media = window.matchMedia("(prefers-reduced-motion)");
@@ -59,56 +74,26 @@ export default defineComponent({
 
 
 <style>
-* {
-    box-sizing: border-box;
-}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-p {
-    margin-top: 0;
-    font-size: 20px;
-}
-
-a {
-    text-decoration: none;
-}
-
-h2 {
-    font-size: 42px;
-    margin-bottom: 15px;
-}   
-
-button {
-    background: #e85757;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    display: block;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 16px;
-    width: 120px;
-    color: #fff;
-}
 
 .card {
-    /* background: url("src/card-bg.jpg") no-repeat; */
-    background-size: cover;
-    max-width: 500px;
     margin: auto;
     height: auto;
-    padding: 40px;
     position: relative;
-    color: #fff;
+    color: #E6B98B;
+    background-color: #13083D;
     transition: transform 0.1s ease;
+    padding: 20vw 10vw 20vw 10vw;
     transform-style: preserve-3d;
     will-change: transform;
     }
 
-.card::before {    content: "";
+.card::before {    
+    content: "";
     background: rgba(0, 0, 0, 0.4);
     position: absolute;
     height: 100%;
@@ -119,26 +104,13 @@ button {
     bottom: 0;
 }
 
-/* Slight parallax effect on hover */
 .card:hover .content {
     transform: translateZ(12px);
-}
+} 
 
 .content {
     position: relative;
     z-index: 1;
     transition: transform 0.3s ease;
 }
-
-/* Demo only */
-.container {
-    margin-top: 100px;
-}
-
-.photo-cred {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-}
-
 </style>
