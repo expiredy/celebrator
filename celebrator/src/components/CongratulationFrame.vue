@@ -1,8 +1,8 @@
 <template>
     <article class="card" ref="main">
         <div class="content"> 
-            <h2>Здесь могла быть ваша реклама</h2>
-            <p>Check out these top 10 beaches this summer.</p>
+            <h2>{{main_content}}</h2>
+            <p>{{signature}}</p>
         </div>
     </article>
 </template>
@@ -22,8 +22,8 @@ function startSystem (card: any, motion_match_media: MediaQueryList) {
 
         var horizontal = (clientX - offsetLeft) / clientWidth;
         var vertical = (clientY - offsetTop) / clientHeight;
-        var rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
-        var rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+        var rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(1);
+        var rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed();
 
         if (card){
             card.style.transform = 'perspective(' + clientWidth + 'px) rotateX(' + rotateY + 'deg) rotateY(' + rotateX + 'deg) scale3d(1, 1, 1)';
@@ -38,19 +38,6 @@ function startSystem (card: any, motion_match_media: MediaQueryList) {
     
     if (!motion_match_media.matches) {
         card.addEventListener("mousemove", handleHover);
-        // card.addEventListener("deviceorientation", function(event: any) {
-        //     let position = Math.round(event.gamma);
-        //     if (Math.abs(position) > ORIENTATION_LIMIT) {
-        //         if (position > ORIENTATION_LIMIT) {
-        //                 position = ORIENTATION_LIMIT;
-        //             } else {
-        //                 position = -ORIENTATION_LIMIT;
-        //                 }
-        //             }
-        //     position = position / -100;
-        //     let style = "rotateY(" + position + "deg)";
-        //     card.style.transform = style;
-        //     });
         card.addEventListener("mouseleave", resetStyles);
 
     }   

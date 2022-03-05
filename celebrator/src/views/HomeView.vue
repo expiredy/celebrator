@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-      <SwipingButton coefficient="1"/>
+      <SwipingButton id="left-position" class="swipe-button-holder" :step_value="1"/>
       <FrameCarousel/>
-      <SwipingButton coefficient="-1"/>
+      <SwipingButton id="right-position" class="swipe-button-holder" :step_value="-1"/>
   </div>
 </template>
 
@@ -18,4 +18,40 @@ export default defineComponent({
     SwipingButton
   },
 });
-</script>   
+</script>
+
+<style>
+    .swipe-button-holder {
+        position: absolute;
+        z-index: 10001;
+        border: none;        
+    }
+
+    #left-position{
+        top: 0;
+        left: 0;
+    }
+
+    #right-position{
+        top: 0;
+        left: 86%;
+        right: 0;
+    }
+
+    @media screen and (orientation: portrait){
+        #left-position{
+            top: 0;
+            left: 0;
+            bottom: 95%;
+            padding: 0;
+            margin: 0;
+        }
+        #right-position{
+            left: 0;
+            right: 0;
+            top: 95%;
+            bottom: 5%;
+        }
+    }
+
+</style>
