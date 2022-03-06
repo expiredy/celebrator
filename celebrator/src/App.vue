@@ -13,11 +13,17 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: url(@/assets/sunset-background.png);
+  /* background-image: url(@/assets/sunset-background.png); */
   background-repeat: no-repeat;
+  overflow: scroll;
+  /* background-size: auto 100%; */
   /* background-size: contain; */
   /* background-origin: content-box; */
-  /* background-color: #7D47BF; */
+  background-color: #7D47BF;
+}
+
+nav{
+  z-index: 1;
 }
 
 nav a {

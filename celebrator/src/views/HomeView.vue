@@ -31,11 +31,18 @@ export default defineComponent({
         top: 0;
         left: 0;
     }
+    #left-position img{
+        transform: rotate(90deg);
+    }
 
     #right-position{
         top: 0;
         left: 86%;
         right: 0;
+    }
+
+    #right-position img{
+        transform: rotate(-90deg);
     }
 
     @media screen and (orientation: portrait){

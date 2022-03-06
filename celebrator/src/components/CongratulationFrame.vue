@@ -39,22 +39,25 @@ function startSystem (card: any, motion_match_media: MediaQueryList) {
     if (!motion_match_media.matches) {
         card.addEventListener("mousemove", handleHover);
         card.addEventListener("mouseleave", resetStyles);
-
     }   
 }
 
-
-
 export default defineComponent({
     name: 'CongratulationFrame',              
-    props: {main_content: {default: 'Здесь могла быть ваша реклама', type: String},
+    props: {offset_index: {default: 1, type: Number},
+            main_content: {default: 'Здесь могла быть ваша реклама', type: String},
             signature: {default: 'Вдохновитель', type: String}},    
 
+    started(){
+    },
+    
     mounted() {
+        
         var card: any = this.$refs.main;
         var motion_match_media = window.matchMedia("(prefers-reduced-motion)");
-        startSystem(card, motion_match_media);
-    },
+        card.parentElement.style.setProperty("--offset", this.offset_index);
+        startSystem(card.parentElement, motion_match_media);
+    }
 
 });
 </script>
