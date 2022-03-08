@@ -1,6 +1,18 @@
 <template>
     <article class="card" ref="main">
-        <div class="content"> 
+        <div class="content">
+            <!-- <a :href={{logo_url}}>aaa</a> -->
+            <!-- <img v-bind:src=logotype_image/>  -->
+            
+            <!-- <h1>{{logo_url}}</h1> -->
+            <div>
+                <h3>Debug</h3>
+                <ul>
+                    <li>{{this.gyroscope_y}}</li>
+                    <li>{{this.gyroscope_x}}</li>
+                    <li>{{this.gyroscope_z}}</li>
+                </ul>
+            </div>
             <h2>{{main_content}}</h2>
             <p>{{signature}}</p>
         </div>
@@ -13,6 +25,7 @@ import { defineComponent, handleError } from 'vue';
 
 const THRESHOLD = 15;
 const ORIENTATION_LIMIT = 45;
+
 
 function startSystem (card: any, motion_match_media: MediaQueryList) {
     
@@ -30,29 +43,46 @@ function startSystem (card: any, motion_match_media: MediaQueryList) {
         }
     }
 
+    function handelGyroscopeChanges(event: any) {
+        //   console.log("Magnetometer: "
+        //             + event.alpha + ", "
+        //             + event.beta + ", "
+        //             + event.gamma
+        //             );
+
+        this.gyroscope_y = event.beta;
+        this.gyroscope_x = event.gamma;
+    }
+
     function resetStyles(event: any) {
         if (card){
             card.style.transform = 'perspective(' + event.currentTarget.clientWidth + 'px) rotateX(0deg) rotateY(0deg)';
         }
     }
-    
+
     if (!motion_match_media.matches) {
         card.addEventListener("mousemove", handleHover);
         card.addEventListener("mouseleave", resetStyles);
+        window.addEventListener("deviceorientation", handelGyroscopeChanges);
     }   
 }
 
 export default defineComponent({
-    name: 'CongratulationFrame',              
+    name: 'CongratulationFrame',       
+    data( ) {
+        return {
+            gyroscope_y: 0,
+            gyroscope_x: 0,
+            gyroscope_z: 0
+        }
+    },
+
     props: {offset_index: {default: 1, type: Number},
             main_content: {default: 'Здесь могла быть ваша реклама', type: String},
-            signature: {default: 'Вдохновитель', type: String}},    
+            signature: {default: 'Вдохновитель', type: String},
+            logo_url: {default: "@/assets/plag.jpg", type: String},},    
 
-    started(){
-    },
-    
     mounted() {
-        
         var card: any = this.$refs.main;
         var motion_match_media = window.matchMedia("(prefers-reduced-motion)");
         card.parentElement.style.setProperty("--offset", this.offset_index);
@@ -71,19 +101,18 @@ body {
 
 
 .card {
-    margin: auto;
-    height: auto;
+    margin: 10%;
+    height: 10%;
     position: relative;
     color: #E6B98B;
     background-color: #13083D;
     transition: transform 0.1s ease;
-    padding: 20vw 10vw 20vw 10vw;
+    padding: 10vw 10vw 10vw 10vw;
     transform-style: preserve-3d;
     will-change: transform;
     }
 
 .card::before {    
-    content: "";
     background: rgba(0, 0, 0, 0.4);
     position: absolute;
     height: 100%;

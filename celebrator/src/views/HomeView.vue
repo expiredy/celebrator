@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-      <SwipingButton id="left-position" class="swipe-button-holder" :step_value="1"/>
+      <SwipingButton id="left-position" class="swipe-button-holder" :step_value="1" ref="left-button"/>
       <FrameCarousel/>
-      <SwipingButton id="right-position" class="swipe-button-holder" :step_value="-1"/>
+      <SwipingButton id="right-position" class="swipe-button-holder" :step_value="-1" ref="left-button"/>
   </div>
 </template>
 
@@ -54,10 +54,9 @@ export default defineComponent({
             margin: 0;
         }
         #right-position{
-            left: 0;
+            left: -100%;
             right: 0;
-            top: 95%;
-            bottom: 5%;
+            top: 93%;
         }
     }
 

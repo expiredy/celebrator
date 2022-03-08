@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="swipe-button" :on-click="swipeCards"><img src="@/assets/logo.png"></button>
+        <button type="button" class="swipe-button" @click="swipeCards()"><img src="@/assets/logo.png"></button>
     </div>
 </template>
 
@@ -8,17 +8,22 @@
 
 import { defineComponent } from 'vue';
 
-const cards_carousel = document.getElementById("card-carousel");
 
 function swipeCards()
 {
-
+    const cards_carousel = document.getElementById("card-carousel");
+    // console.log(cards_carousel);
+    if (cards_carousel !== null){
+        // cards_carousel.style.setProperty("--position",  (+cards_carousel.style.getPropertyValue("--position")) + 1);
+    }
+    
 }
 
 export default defineComponent({    
     name: "SwipingButton",
     props: {step_value: {default: 0, type: Number}},
     components: {},
+    methods: {swipeCards}
 })
 </script>
 
@@ -44,7 +49,7 @@ export default defineComponent({
     }
 
     .swipe-button:active > img{
-        width: 10%;
+        width: 50%;
         height: auto;
     }
 
@@ -55,7 +60,13 @@ export default defineComponent({
         }
         
         .swipe-button > img{
-            
+            height: 100%;
+            width: auto;
+        }
+
+        .swipe-button:active > img{
+            height: 50%;
+            width: auto;
         }
     }
 </style>
