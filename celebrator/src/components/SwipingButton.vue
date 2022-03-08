@@ -12,9 +12,9 @@ import { defineComponent } from 'vue';
 function swipeCards()
 {
     const cards_carousel = document.getElementById("card-carousel");
-    // console.log(cards_carousel);
-    if (cards_carousel !== null){
-        // cards_carousel.style.setProperty("--position",  (+cards_carousel.style.getPropertyValue("--position")) + 1);
+    var new_position: Number = (+cards_carousel.style.getPropertyValue("--position")) + this.step_value
+    if (cards_carousel !== null && (1 <= new_position) && (new_position <= 6) ){
+        cards_carousel.style.setProperty("--position",  ""+new_position);
     }
     
 }
