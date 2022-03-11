@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-      <SwipingButton id="left-position" class="swipe-button-holder" :step_value="1" ref="left-button"/>
+      <SwipingButton id="left-position" class="swipe-button-holder" :step_value="-1" ref="left-button"/>
       <FrameCarousel/>
-      <SwipingButton id="right-position" class="swipe-button-holder" :step_value="-1" ref="left-button"/>
+      <SwipingButton id="right-position" class="swipe-button-holder" :step_value="1" ref="left-button"/>
   </div>
 </template>
 

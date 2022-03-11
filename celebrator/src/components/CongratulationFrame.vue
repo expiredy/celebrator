@@ -1,7 +1,6 @@
 <template>
     <article class="card" ref="main">
         <div class="content">
-            <!-- <img :src={{logo_url}} :alt="selecteditem"/>  -->
             <p>{{main_content}}</p>
             <a :href="signature_url">{{signature}}</a>
         </div>
@@ -16,7 +15,15 @@ const THRESHOLD = 15;
 const ORIENTATION_LIMIT = 45;
 
 
-function startSystem (card: any, motion_match_media: MediaQueryList, offset_index: number) {
+function startSystem (card: any, motion_match_media: MediaQueryList, offset_index: string) {
+
+
+    function resetStyles(event: any) {
+        if (card){
+            card.style.transform = '';
+        }
+    }
+
     
     function handleHover(event: any) {
         var { clientX, clientY, currentTarget } = event;
@@ -30,20 +37,14 @@ function startSystem (card: any, motion_match_media: MediaQueryList, offset_inde
         if (card){
             card.style.transform = 'perspective(' + clientWidth + 'px) rotateX(' + rotateY + 'deg) rotateY(' + rotateX + 'deg) scale3d(1, 1, 1)';
         }else{
-            resetStyles()
+            resetStyles(event);
         }
     }
 
-    function handelGyroscopeChanges(event: any) {
-        this.gyroscope_y = event.beta;
-        this.gyroscope_x = event.gamma;
-    }
-
-    function resetStyles(event: any) {
-        if (card){
-            card.style.transform = '';
-        }
-    }
+    // function handelGyroscopeChanges(event: any) {
+    //     this.gyroscope_y = event.beta;
+    //     this.gyroscope_x = event.gamma;
+    // }
 
     if (!motion_match_media.matches) {
         card.addEventListener("mousemove", handleHover);
