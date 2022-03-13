@@ -1,8 +1,9 @@
 <template>
     <article class="card" ref="main">
-        <div class="content"> 
-            <h2>{{main_content}}</h2>
-            <p>{{signature}}</p>
+        <div class="content">
+            <img :src="logo_url" @error="this.src='@/assets/plag.jpg'" alt="logo"/> 
+            <p>{{main_content}}</p>
+            <a :href="signature_url">{{signature}}</a>
         </div>
     </article>
 </template>
@@ -14,10 +15,19 @@ import { defineComponent, handleError } from 'vue';
 const THRESHOLD = 15;
 const ORIENTATION_LIMIT = 45;
 
-function startSystem (card: any, motion_match_media: MediaQueryList) {
+
+function startSystem (card: any, motion_match_media: MediaQueryList, offset_index: string) {
+
+
+    function resetStyles(event: any) {
+        if (card){
+            card.style.transform = '';
+        }
+    }
+
     
     function handleHover(event: any) {
-        const { clientX, clientY, currentTarget } = event;
+        var { clientX, clientY, currentTarget } = event;
         const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
 
         var horizontal = (clientX - offsetLeft) / clientWidth;
@@ -27,34 +37,45 @@ function startSystem (card: any, motion_match_media: MediaQueryList) {
 
         if (card){
             card.style.transform = 'perspective(' + clientWidth + 'px) rotateX(' + rotateY + 'deg) rotateY(' + rotateX + 'deg) scale3d(1, 1, 1)';
+        }else{
+            resetStyles(event);
         }
     }
 
-    function resetStyles(event: any) {
-        if (card){
-            card.style.transform = 'perspective(' + event.currentTarget.clientWidth + 'px) rotateX(0deg) rotateY(0deg)';
-        }
-    }
-    
+    // function handelGyroscopeChanges(event: any) {
+    //     this.gyroscope_y = event.beta;
+    //     this.gyroscope_x = event.gamma;
+    // }
+
     if (!motion_match_media.matches) {
         card.addEventListener("mousemove", handleHover);
         card.addEventListener("mouseleave", resetStyles);
-
+        // window.addEventListener("deviceorientation", handelGyroscopeChanges);
     }   
 }
 
-
-
 export default defineComponent({
-    name: 'CongratulationFrame',              
-    props: {main_content: {default: 'Здесь могла быть ваша реклама', type: String},
-            signature: {default: 'Вдохновитель', type: String}},    
+    name: 'CongratulationFrame',       
+    data( ) {
+        return {
+            gyroscope_y: 0,
+            gyroscope_x: 0,
+            gyroscope_z: 0
+        }
+    },
+
+    props: {offset_index: {default: "1", type: String},
+            main_content: {default: "Здесь могла быть ваша реклама", type: String},
+            signature: {default: 'Вдохновитель', type: String},
+            signature_url: {default: 'https://t.me/expiredy', type: String},
+            logo_url: {default: "@/assets/plag.jpg", type: String}},    
 
     mounted() {
         var card: any = this.$refs.main;
         var motion_match_media = window.matchMedia("(prefers-reduced-motion)");
-        startSystem(card, motion_match_media);
-    },
+        card.parentElement.style.setProperty("--offset", this.offset_index);
+        startSystem(card.parentElement, motion_match_media, this.offset_index);
+    }
 
 });
 </script>
@@ -68,19 +89,18 @@ body {
 
 
 .card {
-    margin: auto;
-    height: auto;
+    margin: 10%;
+    height: 10%;
     position: relative;
     color: #E6B98B;
     background-color: #13083D;
     transition: transform 0.1s ease;
-    padding: 20vw 10vw 20vw 10vw;
+    padding: 3vw 3vw 3vw 3vw;
     transform-style: preserve-3d;
     will-change: transform;
     }
 
 .card::before {    
-    content: "";
     background: rgba(0, 0, 0, 0.4);
     position: absolute;
     height: 100%;
@@ -100,4 +120,14 @@ body {
     z-index: 1;
     transition: transform 0.3s ease;
 }
+
+.content a{
+    color: #E6B98B;
+}
+
+/* .content img {
+    width: 30%;
+    height: 30%;
+} */
+
 </style>

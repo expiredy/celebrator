@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-      <SwipingButton id="left-position" class="swipe-button-holder" :step_value="1"/>
+      <SwipingButton id="left-position" class="swipe-button-holder" :step_value="-1" ref="left-button"/>
       <FrameCarousel/>
-      <SwipingButton id="right-position" class="swipe-button-holder" :step_value="-1"/>
+      <SwipingButton id="right-position" class="swipe-button-holder" :step_value="1" ref="left-button"/>
   </div>
 </template>
 
@@ -31,11 +31,18 @@ export default defineComponent({
         top: 0;
         left: 0;
     }
+    #left-position img{
+        transform: rotate(90deg);
+    }
 
     #right-position{
         top: 0;
         left: 86%;
         right: 0;
+    }
+
+    #right-position img{
+        transform: rotate(-90deg);
     }
 
     @media screen and (orientation: portrait){
@@ -47,10 +54,9 @@ export default defineComponent({
             margin: 0;
         }
         #right-position{
-            left: 0;
+            left: -100%;
             right: 0;
-            top: 95%;
-            bottom: 5%;
+            top: 93%;
         }
     }
 
