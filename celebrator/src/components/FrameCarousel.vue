@@ -9,21 +9,21 @@
 По праву вас можно назвать сердцем нашего замечательного коллектива, который именно вы наполняете теплом и уютом. Не сосчитать слов нашей благодарности и признательности вам за ваш усердный труд и упорство, с которым вы помогаете нам в совместной работе над одним общим делом. Хочу пожелать вам великого терпения, ведь порой всем приходится нелегко, но я верю, что с вашими талантами и креативом, вы сможете найти выход из любом ситуации. Оставайтесь такими же солнечными и неотразимыми, пусть улыбки не покидают ваши лица, а радость ваши сердца!"
                                  signature="Артур Камалеев"
                                  signature_url="https://t.me/arturkamaleev" 
-                                 logo_url="@assets/Kamalev.jpg" />
+                                 logo_url="@/assets/bois/Kamalev.jpg" />
         </li>
         <li class='card-frame'>
             <CongratulationFrame offset_index="2"
                                  main_content="Дорогие вы наши) Мы знакомы не так давно, но уже много чего успели пройти вместе и я понял, как же мне повезло, что я попал в такую дружную команду. Хоть я и не так часто пишу в чат, но от себя хотел поздравить каждую из вас, потому что работать с такими коллегами - одно удовольствие, вы самые лучшие!!!"
                                  signature="Никита Остроглядов"
                                  signature_url="https://t.me/Nik_osn"
-                                 logo_url="@assets/Ostrogov.jpg" />
+                                 logo_url="@/assets/bois/Ostrogov.jpg" />
         </li>
         <li class='card-frame'>
             <CongratulationFrame offset_index="3"
                                  main_content="Дорогие дамы, в этот знаменательный день хочу вас поздравить с 8 марта! Желаю вам здоровья, творческих успехов, радости, удачи в любых начинаниях, оставайтесь такими же позитивными и радостными, пусть все ваши желания исполнятся и чтоб настроение было просто пушка, бомба, пулемёт"
                                  signature="Анатолий Дегтярев" 
                                  signature-url="https://t.me/aa_degtyarev" 
-                                 logo_url="@assets/Degtyarov.jpg"/>
+                                 logo_url="@/assets/bois/Degtyarov.jpg"/>
         </li>
         <li class='card-frame'>
             <CongratulationFrame offset_index="4"
@@ -34,7 +34,7 @@
 Желаю теплых эмоций, побольше светлых улыбок и счастливых минут!"
                                  signature="Артём Альбицкий"
                                  signature-url="https://t.me/@altairkin"
-                                 logo_url="@assets/Albitsky.jpg"/>
+                                 logo_url="@/assets/bois/Albitsky.jpg"/>
         </li>
         <li class='card-frame'>
             <CongratulationFrame offset_index="5"
@@ -42,7 +42,7 @@
 Хочу пожелать тебе счастья и, чтобы вокруг тебя было много крутых людей, которые готовы прийти на помощь и поддержать. Иди к своей цели и никогда не сдавайся, с 8 марта!"
                                  signature="Андрей Чумаков"
                                  signature-url="https://t.me/chureya"
-                                 logo_url="@assets/"/>
+                                 logo_url="@/assets/bois/Chumakov.jpg"/>
         </li>
         <li class='card-frame'>
             <CongratulationFrame offset_index="6"
@@ -64,7 +64,7 @@
 "
                                 signature="Никита Телетов"
                                 signature_url="https://t.me/kyrgun"
-                                logo_url="@assets/Teletov.jpg" />
+                                logo_url="@/assets/bois/Teletov.jpg" />
         </li>
     </ul>
   
@@ -150,7 +150,7 @@ li.card-frame {
         transform: rotateX(calc(10deg * var(--radius)))
             translateY(calc(-30vw * var(--radius)));
         z-index: calc((var(--position) - var(--abs)));
-        max-width: 200%;
+        max-width: 150%;
         height: auto;
     } 
 }

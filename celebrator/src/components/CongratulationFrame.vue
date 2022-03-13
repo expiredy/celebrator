@@ -1,6 +1,7 @@
 <template>
     <article class="card" ref="main">
         <div class="content">
+            <img :src="logo_url" @error="this.src='@/assets/plag.jpg'" alt="logo"/> 
             <p>{{main_content}}</p>
             <a :href="signature_url">{{signature}}</a>
         </div>
@@ -124,9 +125,9 @@ body {
     color: #E6B98B;
 }
 
-.content img {
+/* .content img {
     width: 30%;
     height: 30%;
-}
+} */
 
 </style>
